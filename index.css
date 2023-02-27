@@ -5,6 +5,7 @@ body {
     justify-content: center;
     width: 100%;
     font-family: sans-serif;
+    background: #4fabca;
 }
 
 .main {
@@ -23,6 +24,7 @@ body {
 
 .main img {
     width: 20%;
+    margin-top: 10px;
 }
 
 .main h2 {
@@ -30,3 +32,22 @@ body {
     margin: 0;
 }
 
+.main p {
+    font-size: 2rem;
+    margin: 0   ;
+}
+
+
+@media (max-width:800px) {
+    .main h1 {
+        font-size: 3rem;
+        margin: 1rem 0;
+    }
+    .main p {
+        font-size: 1rem;
+        margin: 1rem 0;
+
+    }
+    
+    
+}
