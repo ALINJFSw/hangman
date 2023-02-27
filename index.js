@@ -13,46 +13,69 @@ const getRandomWord = () => {
   return WORDS[r];
 };
 
-
-// const replace = (word, replacement, index) => {
-//   return word.substring(0, index) + replacement + word.substring(index + 2);
-// };
-
-const setWordBoard = (word) => {
-    let wordBoard = ""
-    for(const letter in word){
-      if (!word[letter] ){
-        wordBoard += "_ "
-      }
-      else{
-        wordBoard += letter
-      }
-    }
-    const board = document.getElementById("board");
-    board.innerHTML = wordBoard
+const setPicture = (level) => {
+  const image = document.getElementById("image");
+  image.src = `./assets/${level}.png`;
 }
 
-const start = () => {
-  const image = document.getElementById("image");
-  image.src = "./assets/1.png";
-  
-  
-  document.addEventListener("keypress", (event) => {
-    const choisen = getRandomWord();
-    const answer = {};
+const gameOver = () => {
+    const result = document.getElementById("result");
+    result.innerHTML = "you Lost"
+    result.style = "color: red";  
+    return;
+}
 
-    for (let i = 0; i < choisen.length; i++) {
-      answer[choisen[i]] = false;
+const setWordBoard = (word) => {
+  let wordBoard = "";
+  for (const letter in word) {
+    if (!word[letter]) {
+      wordBoard += "_ ";
+    } else {
+      wordBoard += letter;
     }
+  }
+  const board = document.getElementById("board");
+  board.innerHTML = wordBoard;
+};
 
-    console.log(answer);
+const start = () => {
+  let level = 1
+
+  setPicture(level);
+  const answer = {};
+  const choisen = getRandomWord();
+
+  for (let i = 0; i < choisen.length; i++) {
+    answer[choisen[i]] = false;
+  }
+
+  console.log(choisen);
+
+  document.addEventListener("keypress", (event) => {
+    console.log("key");
     const key = event.key;
+    let found = false
     for (const letter in answer) {
+    
       if (key == letter) {
-        answer.letter = true;
-        setWordBoard();
+        answer[letter] = true;
+        found = true;
+        break
+      } 
+
+    }
+    if (!found) {
+      level += 1;
+      if(level > 7){
+        gameOver() ;
+        return;
+      }
+      else{
+          setPicture(level)
       }
     }
+    setWordBoard(answer);
+
   });
 };
 start();
