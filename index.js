@@ -5,14 +5,14 @@ const setPicture = (level) => {
   image.src = `./assets/${level}.png`;
 };
 
+setPicture(level);
+
 const todo = () => {
   const to = document.getElementById("todo");
   to.innerHTML = "reload to Replay again";
 }
 
-setPicture(level);
 
-const answer = {};
 
 
 const getRandomWord = () => {
@@ -30,12 +30,16 @@ const getRandomWord = () => {
   return WORDS[r];
 };
 
+const answer = [];
 
 const choisen = getRandomWord();
 
 
 for (let i = 0; i < choisen.length; i++) {
-  answer[choisen[i]] = false;
+  answer.push( {
+    letter: choisen[i],
+    valid: false
+  })
 }
 
 
@@ -53,11 +57,9 @@ const gameWin = () => {
 
 const testGame = (answer) => {
   let result = true;
-  console.log(answer);
-  for (letter in answer) {
-    if (answer[letter] == false) {
-      console.log("haa");
-      result = false;
+  for (let i in answer) {
+    if (answer[i].valid == false) {
+        result = false;
     }
   }
   if (result) {
@@ -77,26 +79,28 @@ const gameOver = () => {
 
 const setWordBoard = (word) => {
   let wordBoard = "";
-  for (const letter in word) {
-    if (!word[letter]) {
+  for (let i in word) {
+    if (!word[i].valid) {
       wordBoard += "_ ";
     } else {
-      wordBoard += letter;
+      console.log(word[i].letter);
+      wordBoard += word[i].letter;
     }
   }
   const board = document.getElementById("board");
   board.innerHTML = wordBoard;
 };
 const keyPress = (event) => {
-  console.log("key");
   const key = event.key;
   let found = false;
-  for (const letter in answer) {
-    if (key == letter) {
-      answer[letter] = true;
+  for (let i in answer) {
+    if (key == answer[i].letter) {
+      
+      console.log("yes");
+      answer[i].valid = true;
       testGame(answer)
       found = true;
-      break;
+      
     }
   }
   if (!found) {
