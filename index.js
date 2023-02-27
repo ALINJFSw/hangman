@@ -1,3 +1,5 @@
+//read my readme before you start reading because its so blended :)
+
 let level = 1;
 
 const setPicture = (level) => {
