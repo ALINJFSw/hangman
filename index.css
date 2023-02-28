@@ -54,10 +54,18 @@ body {
 
 
 @media (max-width:800px) {
+    .main {
+        flex-direction: column;
+    }
     .main h1 {
         font-size: 3rem;
         margin: 1rem 0;
     }
+    .game,.board {
+        margin-top: 1rem;
+        width: 100%;
+    }
+   
     .main p {
         font-size: 1rem;
         margin: 1rem 0;

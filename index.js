@@ -83,7 +83,7 @@ const setWordBoard = (word) => {
   let wordBoard = "";
   for (let i in word) {
     if (!word[i].valid) {
-      wordBoard += "_ ";
+      wordBoard += "_  ";
     } else {
       console.log(word[i].letter);
       wordBoard += word[i].letter;
@@ -92,9 +92,12 @@ const setWordBoard = (word) => {
   const board = document.getElementById("board");
   board.innerHTML = wordBoard;
 };
+setWordBoard(answer);
+
 const keyPress = (event) => {
   const key = event.key;
   let found = false;
+  
   for (let i in answer) {
     if (key == answer[i].letter) {
       
